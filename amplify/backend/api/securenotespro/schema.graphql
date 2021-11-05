@@ -1,0 +1,16 @@
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "id", operations: [read, update] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+}
+
+type Note @model @auth(rules: [{ allow: owner, ownerField: "userID" }]) {
+  id: ID!
+  content: String!
+}

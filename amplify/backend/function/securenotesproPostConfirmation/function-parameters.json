@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "securenotespro",
+  "functionName": "securenotesproPostConfirmation",
+  "resourceName": "securenotesproPostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "C:\\Users\\Rene\\AppData\\Roaming\\nvm\\v14.18.1\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "securenotesproPostConfirmation",
+  "skipEdit": true,
+  "enableCors": false
+}

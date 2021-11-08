@@ -10,7 +10,7 @@ type User
   name: String!
 }
 
-type Note @model @auth(rules: [{ allow: owner, ownerField: "userID" }]) {
+type Note @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   content: String!
 }

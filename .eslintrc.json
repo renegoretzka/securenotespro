@@ -3,8 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "google", "prettier"],
-  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:react/recommended", "google", "prettier", "next"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -12,6 +11,9 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+  "plugins": ["react"],
+  "rules": {
+    "require-jsdoc": "off",
+    "react/react-in-jsx-scope": "off"
+  }
 }

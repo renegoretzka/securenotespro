@@ -43,6 +43,14 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "apisecurenotesproGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apisecurenotesproGraphQLAPIIdOutput"
+    },
+    "apisecurenotesproGraphQLAPIEndpointOutput": {
+      "Type": "String",
+      "Default": "apisecurenotesproGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -95,6 +103,12 @@
             },
             "GROUP": {
               "Ref": "GROUP"
+            },
+            "API_SECURENOTESPRO_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apisecurenotesproGraphQLAPIIdOutput"
+            },
+            "API_SECURENOTESPRO_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apisecurenotesproGraphQLAPIEndpointOutput"
             }
           }
         },
@@ -193,6 +207,73 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "appsync:GraphQL"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apisecurenotesproGraphQLAPIIdOutput"
+                      },
+                      "/types/Query/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:appsync:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apis/",
+                      {
+                        "Ref": "apisecurenotesproGraphQLAPIIdOutput"
+                      },
+                      "/types/Mutation/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }

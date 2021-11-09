@@ -7,14 +7,11 @@ Amplify.configure({ ...awsConfig, ssr: true })
 import { store } from '@/context/store'
 
 import 'tailwindcss/tailwind.css'
-import Header from '@/components/Header'
 
 function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <div className="md:container md:mx-auto">
-        <Component {...pageProps} />
-      </div>
+      <Component {...pageProps} />
     </Provider>
   )
 }

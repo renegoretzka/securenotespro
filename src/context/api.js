@@ -26,8 +26,44 @@ export const api = createApi({
         }
       },
       invalidatesTags: ['User']
+    }),
+    signUp: build.mutation({
+      async queryFn({ email, password, fullname }) {
+        try {
+          const res = await Auth.signUp({
+            username: email,
+            password,
+            attributes: {
+              email,
+              name: fullname
+            }
+          })
+          return {
+            data: res.user.userSub
+          }
+        } catch (error) {
+          return { error }
+        }
+      }
+    }),
+    confirmSignUp: build.mutation({
+      async queryFn({ email: username, code }) {
+        try {
+          const res = await Auth.confirmSignUp(username, code)
+          return {
+            data: res.user.userSub
+          }
+        } catch (error) {
+          return { error }
+        }
+      }
     })
   })
 })
 
-export const { useGetAuthenticatedUserQuery, useSignInMutation } = api
+export const {
+  useGetAuthenticatedUserQuery,
+  useSignInMutation,
+  useSignUpMutation,
+  useConfirmSignUpMutation
+} = api

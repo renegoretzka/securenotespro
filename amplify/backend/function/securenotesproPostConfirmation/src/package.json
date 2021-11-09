@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "latest"
+    "appsync-client": "^2.11.0",
+    "graphql-tag": "^2.12.6"
   }
 }

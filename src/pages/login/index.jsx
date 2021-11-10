@@ -1,13 +1,48 @@
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 import Header from '@/components/Header'
+import { ShieldCheckIcon } from '@heroicons/react/solid'
 
 import { useSignInMutation } from '@/context/api'
 
-import { ShieldCheckIcon } from '@heroicons/react/solid'
-
 export default function Login() {
-  const [signIn, { isLoading }] = useSignInMutation()
+  const [signIn, { isLoading, isSuccess, isError, error }] = useSignInMutation()
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  function handleChangeEmail(event) {
+    setEmail(event.target.value)
+  }
+  function handleChangePassword(event) {
+    setPassword(event.target.value)
+  }
+
+  function handleLogin(event) {
+    signIn({
+      email,
+      password
+    })
+    event.preventDefault()
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log('logged in')
+    }
+  }, [isSuccess])
+
+  const [confirmSignUpModal, setConfirmSignUpModal] = useState(false)
+
+  useEffect(() => {
+    if (isError) {
+      if (error.code === 'UsernameExistsException') {
+        // TODO: Error code for missing signup confirmation > Show confirmSignUp Modal
+      }
+    }
+  }, [isError])
+
   return (
     <>
       <Header title="Secure Notes Pro - Login" />
@@ -29,7 +64,7 @@ export default function Login() {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" action="#" method="POST">
+            <form className="space-y-6" onSubmit={handleLogin}>
               <div>
                 <label
                   htmlFor="email"
@@ -41,6 +76,8 @@ export default function Login() {
                   <input
                     id="email"
                     name="email"
+                    value={email}
+                    onChange={handleChangeEmail}
                     type="email"
                     autoComplete="email"
                     required
@@ -60,6 +97,8 @@ export default function Login() {
                   <input
                     id="password"
                     name="password"
+                    value={password}
+                    onChange={handleChangePassword}
                     type="password"
                     autoComplete="current-password"
                     required

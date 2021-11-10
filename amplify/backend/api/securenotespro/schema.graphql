@@ -4,6 +4,7 @@ type User
     rules: [
       { allow: owner, ownerField: "id", operations: [read, update] }
       { allow: private, operations: [read] }
+      { allow: private, provider: iam }
     ]
   ) {
   id: ID!

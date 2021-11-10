@@ -11,11 +11,9 @@ import ConfirmSignUpModal from '@/components/ConfirmSignUpModal'
 export default function Register() {
   const [signUp, { loading, isSuccess, isError, error }] = useSignUpMutation()
 
+  const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [fullname, setFullname] = useState('')
-
-  const [confirmSignUpModal, setConfirmSignUpModal] = useState(false)
 
   function handleChangeFullname(event) {
     setFullname(event.target.value)
@@ -35,6 +33,8 @@ export default function Register() {
     })
     event.preventDefault()
   }
+
+  const [confirmSignUpModal, setConfirmSignUpModal] = useState(false)
 
   useEffect(() => {
     if (isSuccess) {

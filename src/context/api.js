@@ -17,10 +17,10 @@ export const api = createApi({
       tagTypes: ['User']
     }),
     signIn: build.mutation({
-      async queryFn({ username, password }) {
+      async queryFn({ email: username, password }) {
         try {
           const res = await Auth.signIn(username, password)
-          console.log(res)
+          return { data: res.attributes }
         } catch (error) {
           return { error }
         }
@@ -38,8 +38,9 @@ export const api = createApi({
               name: fullname
             }
           })
+          console.log(res)
           return {
-            data: res.user.userSub
+            data: res
           }
         } catch (error) {
           return { error }

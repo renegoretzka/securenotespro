@@ -1,18 +1,13 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-
-import { useGetAuthenticatedUserQuery } from '@/context/api'
+import Layout from '@/components/Layout'
+import NotesList from '@/components/NotesList'
 
 function Home() {
-  const router = useRouter()
-  const { data: user, isError: authError } = useGetAuthenticatedUserQuery()
-
-  useEffect(() => {
-    if (authError) {
-      router.push('/login')
-    }
-  }, [authError])
-
-  return <p>{user?.name}</p>
+  return (
+    <>
+      <Layout title="Notes">
+        <NotesList />
+      </Layout>
+    </>
+  )
 }
 export default Home

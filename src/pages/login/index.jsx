@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import Header from '@/components/Header'
+import ConfirmSignUpModal from '@/components/ConfirmSignUpModal'
 import { ShieldCheckIcon } from '@heroicons/react/solid'
 
 import { useSignInMutation } from '@/context/api'
 
 export default function Login() {
+  const router = useRouter()
   const [signIn, { isLoading, isSuccess, isError, error }] = useSignInMutation()
 
   const [email, setEmail] = useState('')
@@ -29,7 +32,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('logged in')
+      router.replace('/')
     }
   }, [isSuccess])
 
@@ -37,8 +40,11 @@ export default function Login() {
 
   useEffect(() => {
     if (isError) {
-      // TODO: Error code for missing signup confirmation > Show confirmSignUp Modal
-      // TODO: Wrong password
+      if (error.code === 'NotAuthorizedException') {
+        // TODO: Handle wrong password
+      } else if (error.code === 'UserNotConfirmedException') {
+        setConfirmSignUpModal(true)
+      }
     }
   }, [isError])
 
@@ -129,6 +135,11 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <ConfirmSignUpModal
+        email={email}
+        show={confirmSignUpModal}
+        setShow={setConfirmSignUpModal}
+      />
     </>
   )
 }

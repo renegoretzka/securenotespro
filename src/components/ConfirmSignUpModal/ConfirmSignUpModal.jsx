@@ -32,7 +32,9 @@ export default function ConfirmSignUpModal({ email, show, setShow }) {
 
   useEffect(() => {
     if (isError) {
-      // TODO: Handle error / wrong confirmation code
+      if (error === 'CodeMismatchException') {
+        // TODO: Handle wrong confirmation code
+      }
     }
   }, [isError])
 

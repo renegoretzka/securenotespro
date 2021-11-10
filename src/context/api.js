@@ -24,13 +24,24 @@ export const api = createApi({
           return { error }
         }
       },
-      tagTypes: ['User']
+      providesTags: ['User']
     }),
     signIn: build.mutation({
       async queryFn({ email: username, password }) {
         try {
           const res = await Auth.signIn(username, password)
           return { data: res.attributes }
+        } catch (error) {
+          return { error }
+        }
+      },
+      invalidatesTags: ['User']
+    }),
+    signOut: build.mutation({
+      async queryFn() {
+        try {
+          await Auth.signOut()
+          return { data: 'success' }
         } catch (error) {
           return { error }
         }
@@ -62,7 +73,7 @@ export const api = createApi({
         try {
           const res = await Auth.confirmSignUp(username, code)
           return {
-            data: res.user.userSub
+            data: res.attributes.sub
           }
         } catch (error) {
           return { error }
@@ -75,6 +86,7 @@ export const api = createApi({
 export const {
   useGetAuthenticatedUserQuery,
   useSignInMutation,
+  useSignOutMutation,
   useSignUpMutation,
   useConfirmSignUpMutation
 } = api

@@ -5,7 +5,7 @@ import { useGetAuthenticatedUserQuery } from '@/context/api'
 
 function Home() {
   const router = useRouter()
-  const { data, isError: authError } = useGetAuthenticatedUserQuery()
+  const { data: user, isError: authError } = useGetAuthenticatedUserQuery()
 
   useEffect(() => {
     if (authError) {
@@ -13,6 +13,6 @@ function Home() {
     }
   }, [authError])
 
-  return <p>{data}</p>
+  return <p>{user?.name}</p>
 }
 export default Home

@@ -37,9 +37,8 @@ export default function Login() {
 
   useEffect(() => {
     if (isError) {
-      if (error.code === 'UsernameExistsException') {
-        // TODO: Error code for missing signup confirmation > Show confirmSignUp Modal
-      }
+      // TODO: Error code for missing signup confirmation > Show confirmSignUp Modal
+      // TODO: Wrong password
     }
   }, [isError])
 

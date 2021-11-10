@@ -1,5 +1,7 @@
-import { Auth } from 'aws-amplify'
+import { API, Auth } from 'aws-amplify'
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react'
+
+import { getUser } from '@/graphql/queries'
 
 export const api = createApi({
   baseQuery: fakeBaseQuery(),
@@ -9,7 +11,15 @@ export const api = createApi({
       async queryFn() {
         try {
           const res = await Auth.currentAuthenticatedUser()
-          console.log(res)
+          const user = await API.graphql({
+            query: getUser,
+            variables: {
+              id: res.attributes.sub
+            }
+          })
+          return {
+            data: user.data.getUser
+          }
         } catch (error) {
           return { error }
         }

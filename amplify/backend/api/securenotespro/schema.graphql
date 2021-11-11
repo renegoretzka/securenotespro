@@ -11,7 +11,10 @@ type User
   name: String!
 }
 
-type Note @model @auth(rules: [{ allow: owner }]) {
+type Note @model @auth(rules: [{ allow: owner, ownerField: "authorID" }]) {
   id: ID!
-  content: String!
+  title: String
+  content: String
+  authorID: ID
+  author: User @connection(fields: ["authorID"])
 }

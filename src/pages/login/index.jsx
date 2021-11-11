@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { withSSRContext } from 'aws-amplify'
+
 import Header from '@/components/Header'
 import ConfirmSignUpModal from '@/components/ConfirmSignUpModal'
 import { ShieldCheckIcon } from '@heroicons/react/solid'
@@ -142,4 +144,21 @@ export default function Login() {
       />
     </>
   )
+}
+
+export async function getServerSideProps({ req }) {
+  const { Auth } = withSSRContext({ req })
+  try {
+    await Auth.currentAuthenticatedUser()
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  } catch (err) {
+    return {
+      props: {}
+    }
+  }
 }

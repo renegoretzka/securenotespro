@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
+import { withSSRContext } from 'aws-amplify'
+
+import ConfirmSignUpModal from '@/components/ConfirmSignUpModal'
 import Header from '@/components/Header'
+import { ShieldCheckIcon } from '@heroicons/react/solid'
 
 import { useSignUpMutation } from '@/context/api'
-
-import { ShieldCheckIcon } from '@heroicons/react/solid'
-import ConfirmSignUpModal from '@/components/ConfirmSignUpModal'
 
 export default function Register() {
   const [signUp, { loading, isSuccess, isError, error }] = useSignUpMutation()
@@ -152,4 +153,21 @@ export default function Register() {
       />
     </>
   )
+}
+
+export async function getServerSideProps({ req }) {
+  const { Auth } = withSSRContext({ req })
+  try {
+    await Auth.currentAuthenticatedUser()
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  } catch (err) {
+    return {
+      props: {}
+    }
+  }
 }

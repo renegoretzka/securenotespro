@@ -4,7 +4,10 @@ import { useRouter } from 'next/router'
 import { Menu, Transition } from '@headlessui/react'
 import { UserCircleIcon } from '@heroicons/react/outline'
 
-import { useGetAuthenticatedUserQuery, useSignOutMutation } from '@/context/api'
+import {
+  useGetAuthenticatedUserQuery,
+  useSignOutMutation
+} from '@/context/user'
 
 export default function ProfileNavigation({ mobile = false }) {
   const router = useRouter()

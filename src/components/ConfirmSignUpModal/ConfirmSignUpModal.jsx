@@ -5,7 +5,7 @@ import Modal from '../Modal'
 import { Dialog } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/outline'
 
-import { useConfirmSignUpMutation } from '@/context/api'
+import { useConfirmSignUpMutation } from '@/context/user'
 
 export default function ConfirmSignUpModal({ email, show, setShow }) {
   const router = useRouter()

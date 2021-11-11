@@ -1,43 +1,33 @@
+import { useEffect, useState } from 'react'
+
+import EmptyNotes from '@/components/EmptyNotes'
 import NotePreview from '@/components/NotePreview'
 
-const positions = [
-  {
-    id: 1,
-    title: 'Back End Developer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Engineering',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020'
-  },
-  {
-    id: 2,
-    title: 'Front End Developer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Engineering',
-    closeDate: '2020-01-07',
-    closeDateFull: 'January 7, 2020'
-  },
-  {
-    id: 3,
-    title: 'User Interface Designer',
-    type: 'Full-time',
-    location: 'Remote',
-    department: 'Design',
-    closeDate: '2020-01-14',
-    closeDateFull: 'January 14, 2020'
-  }
-]
+import { useGetNotesQuery } from '@/context/notes'
 
 export default function NotesList() {
+  const { data: notes, isLoading, isFetching, isError } = useGetNotesQuery()
+  const [empty, setEmpty] = useState(true)
+
+  useEffect(() => {
+    if (notes?.length < 1) {
+      setEmpty(true)
+    }
+  }, [notes])
+
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-md">
-      <ul role="list" className="divide-y divide-gray-200">
-        {positions.map((position) => (
-          <NotePreview key={position.id} />
-        ))}
-      </ul>
-    </div>
+    <>
+      {empty ? (
+        <EmptyNotes />
+      ) : (
+        <div className="bg-white shadow overflow-hidden sm:rounded-md">
+          <ul role="list" className="divide-y divide-gray-200">
+            {notes?.map((note) => (
+              <NotePreview key={note.id} />
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
   )
 }

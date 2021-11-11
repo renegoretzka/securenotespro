@@ -7,7 +7,7 @@ import ConfirmSignUpModal from '@/components/ConfirmSignUpModal'
 import Header from '@/components/Header'
 import { ShieldCheckIcon } from '@heroicons/react/solid'
 
-import { useSignUpMutation } from '@/context/api'
+import { useSignUpMutation } from '@/context/user'
 
 export default function Register() {
   const [signUp, { loading, isSuccess, isError, error }] = useSignUpMutation()

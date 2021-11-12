@@ -43,7 +43,7 @@ export default function Login() {
   useEffect(() => {
     if (isError) {
       if (error.code === 'NotAuthorizedException') {
-        // TODO: Handle wrong password
+        console.log('Wrong login credentials') // TODO: Handle wrong password
       } else if (error.code === 'UserNotConfirmedException') {
         setConfirmSignUpModal(true)
       }

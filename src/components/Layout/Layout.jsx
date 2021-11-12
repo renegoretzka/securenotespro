@@ -1,11 +1,20 @@
+import { useRouter } from 'next/router'
+
+import Header from '@/components/Header'
+import ProfileNavigation from '@/components/ProfileNavigation'
+import Navigation from '@/components/Navigation'
+
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { PlusSmIcon } from '@heroicons/react/solid'
-import ProfileNavigation from '../ProfileNavigation'
-import Header from '../Header'
-import Navigation from '../Navigation/Navigation'
 
 export default function Layout({ title, children }) {
+  const router = useRouter()
+
+  function handleNewNote() {
+    router.push('/note/new')
+  }
+
   return (
     <>
       <div className="min-h-full">
@@ -55,6 +64,7 @@ export default function Layout({ title, children }) {
                       <div className="flex-shrink-0">
                         <button
                           type="button"
+                          onClick={handleNewNote}
                           className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"
                         >
                           <PlusSmIcon

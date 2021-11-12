@@ -43,7 +43,7 @@ const userApi = api.injectEndpoints({
           return { error }
         }
       },
-      invalidatesTags: ['User']
+      invalidatesTags: ['User', 'Notes']
     }),
     signUp: build.mutation({
       async queryFn({ email, password, fullname }) {

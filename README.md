@@ -37,3 +37,12 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Creating a company and linking a user to it
+
+- Go to AppSync console and run the GraphQL mutation `createCompany`.
+- Copy the id of the created company from the response
+- Update the field `companyID` of the user by running `updateUser` with the user id given.
+- Create a AWS Cognito Group which has the name of the id from the created company.
+- Add the user to the newly created Cognito Group
+- (User needs to signout and sign in again, if he is already signed in or wait until the token expires to apply changes [Cognito Group saved into token])

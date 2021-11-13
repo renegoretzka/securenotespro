@@ -51,14 +51,15 @@ const notesApi = api.injectEndpoints({
       providesTags: (result, error, id) => [{ type: 'Notes', id }]
     }),
     createNote: build.mutation({
-      async queryFn({ title, content }) {
+      async queryFn({ title, content, companyID }) {
         try {
           const mutation = {
             query: createNote,
             variables: {
               input: {
                 title,
-                content
+                content,
+                companyID
               }
             }
           }

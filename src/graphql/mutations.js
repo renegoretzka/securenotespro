@@ -10,13 +10,36 @@ export const createNote = /* GraphQL */ `
       id
       content
       authorID
+      companyID
       createdAt
       updatedAt
       author {
         id
         name
+        companyID
+        notes {
+          nextToken
+        }
         createdAt
         updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      company {
+        id
+        name
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
       }
     }
   }
@@ -30,13 +53,36 @@ export const updateNote = /* GraphQL */ `
       id
       content
       authorID
+      companyID
       createdAt
       updatedAt
       author {
         id
         name
+        companyID
+        notes {
+          nextToken
+        }
         createdAt
         updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      company {
+        id
+        name
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
       }
     }
   }
@@ -50,13 +96,36 @@ export const deleteNote = /* GraphQL */ `
       id
       content
       authorID
+      companyID
       createdAt
       updatedAt
       author {
         id
         name
+        companyID
+        notes {
+          nextToken
+        }
         createdAt
         updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      company {
+        id
+        name
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
       }
     }
   }
@@ -69,8 +138,32 @@ export const createUser = /* GraphQL */ `
     createUser(input: $input, condition: $condition) {
       id
       name
+      companyID
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      company {
+        id
+        name
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -82,8 +175,32 @@ export const updateUser = /* GraphQL */ `
     updateUser(input: $input, condition: $condition) {
       id
       name
+      companyID
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      company {
+        id
+        name
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -95,8 +212,134 @@ export const deleteUser = /* GraphQL */ `
     deleteUser(input: $input, condition: $condition) {
       id
       name
+      companyID
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      company {
+        id
+        name
+        notes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const createCompany = /* GraphQL */ `
+  mutation CreateCompany(
+    $input: CreateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    createCompany(input: $input, condition: $condition) {
+      id
+      name
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      members {
+        items {
+          id
+          name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const updateCompany = /* GraphQL */ `
+  mutation UpdateCompany(
+    $input: UpdateCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    updateCompany(input: $input, condition: $condition) {
+      id
+      name
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      members {
+        items {
+          id
+          name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deleteCompany = /* GraphQL */ `
+  mutation DeleteCompany(
+    $input: DeleteCompanyInput!
+    $condition: ModelCompanyConditionInput
+  ) {
+    deleteCompany(input: $input, condition: $condition) {
+      id
+      name
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+      members {
+        items {
+          id
+          name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;

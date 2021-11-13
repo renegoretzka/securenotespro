@@ -6,10 +6,12 @@ import Layout from '@/components/Layout'
 import Note from '@/components/Note'
 
 import { useCreateNoteMutation } from '@/context/notes'
+import { useGetAuthenticatedUserQuery } from '@/context/user'
 
 export default function NewNote() {
   const router = useRouter()
   const [createNote, { isSuccess }] = useCreateNoteMutation()
+  const { data: user } = useGetAuthenticatedUserQuery()
 
   useEffect(() => {
     if (isSuccess) {
@@ -19,7 +21,11 @@ export default function NewNote() {
 
   return (
     <Layout title="New Note">
-      <Note onSubmit={createNote} submitButtonText="Create Note" />
+      <Note
+        note={{ companyID: user?.companyID }}
+        onSubmit={createNote}
+        submitButtonText="Create Note"
+      />
     </Layout>
   )
 }

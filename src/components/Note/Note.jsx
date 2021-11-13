@@ -14,7 +14,7 @@ export default function Note({ note = undefined, onSubmit, submitButtonText }) {
   }
 
   function handleSubmit(event) {
-    onSubmit({ ...note, title, content })
+    onSubmit({ ...note, content })
     event.preventDefault()
   }
 

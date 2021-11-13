@@ -3,7 +3,6 @@ type User
   @auth(
     rules: [
       { allow: owner, ownerField: "id", operations: [read, update] }
-      { allow: private, operations: [read] }
       { allow: private, provider: iam }
     ]
   ) {
@@ -13,7 +12,6 @@ type User
 
 type Note @model @auth(rules: [{ allow: owner, ownerField: "authorID" }]) {
   id: ID!
-  title: String
   content: String
   authorID: ID
   author: User @connection(fields: ["authorID"])

@@ -10,7 +10,7 @@ import { useConfirmSignUpMutation } from '@/context/user'
 export default function ConfirmSignUpModal({ email, show, setShow }) {
   const router = useRouter()
 
-  const [confirmSignUp, { loading, isSuccess, isError, error }] =
+  const [confirmSignUp, { isSuccess, isError, error }] =
     useConfirmSignUpMutation()
   const [code, setCode] = useState('')
 

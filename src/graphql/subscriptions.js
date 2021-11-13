@@ -5,7 +5,6 @@ export const onCreateNote = /* GraphQL */ `
   subscription OnCreateNote($authorID: String!) {
     onCreateNote(authorID: $authorID) {
       id
-      title
       content
       authorID
       createdAt
@@ -23,7 +22,6 @@ export const onUpdateNote = /* GraphQL */ `
   subscription OnUpdateNote($authorID: String!) {
     onUpdateNote(authorID: $authorID) {
       id
-      title
       content
       authorID
       createdAt
@@ -41,7 +39,6 @@ export const onDeleteNote = /* GraphQL */ `
   subscription OnDeleteNote($authorID: String!) {
     onDeleteNote(authorID: $authorID) {
       id
-      title
       content
       authorID
       createdAt
@@ -56,8 +53,8 @@ export const onDeleteNote = /* GraphQL */ `
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($id: String) {
+    onCreateUser(id: $id) {
       id
       name
       createdAt
@@ -66,8 +63,8 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($id: String) {
+    onUpdateUser(id: $id) {
       id
       name
       createdAt
@@ -76,8 +73,8 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($id: String) {
+    onDeleteUser(id: $id) {
       id
       name
       createdAt

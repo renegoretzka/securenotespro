@@ -1,6 +1,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateNote = /* GraphQL */ `
+  subscription OnCreateNote($authorID: String!) {
+    onCreateNote(authorID: $authorID) {
+      id
+      title
+      content
+      authorID
+      createdAt
+      updatedAt
+      author {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onUpdateNote = /* GraphQL */ `
+  subscription OnUpdateNote($authorID: String!) {
+    onUpdateNote(authorID: $authorID) {
+      id
+      title
+      content
+      authorID
+      createdAt
+      updatedAt
+      author {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const onDeleteNote = /* GraphQL */ `
+  subscription OnDeleteNote($authorID: String!) {
+    onDeleteNote(authorID: $authorID) {
+      id
+      title
+      content
+      authorID
+      createdAt
+      updatedAt
+      author {
+        id
+        name
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
@@ -28,39 +82,6 @@ export const onDeleteUser = /* GraphQL */ `
       name
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateNote = /* GraphQL */ `
-  subscription OnCreateNote($owner: String!) {
-    onCreateNote(owner: $owner) {
-      id
-      content
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateNote = /* GraphQL */ `
-  subscription OnUpdateNote($owner: String!) {
-    onUpdateNote(owner: $owner) {
-      id
-      content
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteNote = /* GraphQL */ `
-  subscription OnDeleteNote($owner: String!) {
-    onDeleteNote(owner: $owner) {
-      id
-      content
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;

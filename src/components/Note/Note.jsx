@@ -1,68 +1,26 @@
 import { useEffect, useState } from 'react'
 
-import {
-  useCreateNoteMutation,
-  useGetNoteQuery,
-  useUpdateNoteMutation
-} from '@/context/notes'
-
-export default function Note({ noteId = undefined }) {
-  const {
-    data: note,
-    isLoading,
-    isSuccess,
-    isError
-  } = useGetNoteQuery(noteId, { skip: noteId ? false : true })
-
-  const [createNote, { isLoading: loadingCreate, isSuccess: successCreate }] =
-    useCreateNoteMutation()
-  const [updateNote, { isLoading: loadingUpdate, isSuccess: successUpdate }] =
-    useUpdateNoteMutation()
-
-  const [title, setTitle] = useState('')
+export default function Note({ note = undefined, onSubmit, submitButtonText }) {
   const [content, setContent] = useState('')
 
   useEffect(() => {
-    if (isSuccess) {
-      setTitle(note?.title)
-      setContent(note?.content)
+    if (note) {
+      setContent(note.content)
     }
-  }, [isSuccess, note])
+  }, [note])
 
-  function handleChangeTitle(event) {
-    setTitle(event.target.value)
-  }
   function handleChangeContent(event) {
     setContent(event.target.value)
   }
 
-  function handleCreateNote(event) {
-    createNote({ title, content })
-    event.preventDefault()
-  }
-  function handleUpdateNote(event) {
-    updateNote({ id: note.id, title, content })
+  function handleSubmit(event) {
+    onSubmit({ ...note, title, content })
     event.preventDefault()
   }
 
   return (
-    <form
-      onSubmit={noteId ? handleUpdateNote : handleCreateNote}
-      className="relative"
-    >
+    <form onSubmit={handleSubmit} className="relative">
       <div className="border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-        <label htmlFor="title" className="sr-only">
-          Title
-        </label>
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleChangeTitle}
-          id="title"
-          className="block w-full border-0 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0"
-          placeholder="Title"
-        />
         <label htmlFor="content" className="sr-only">
           Content
         </label>
@@ -72,7 +30,7 @@ export default function Note({ noteId = undefined }) {
           value={content}
           onChange={handleChangeContent}
           id="content"
-          className="block w-full border-0 py-0 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm"
+          className="block w-full border-0 pt-2.5 resize-none placeholder-gray-500 focus:ring-0 sm:text-sm"
           placeholder="Write your note here..."
         />
       </div>
@@ -82,7 +40,7 @@ export default function Note({ noteId = undefined }) {
             type="submit"
             className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            {noteId ? 'Update' : 'Create'} Note
+            {submitButtonText}
           </button>
         </div>
       </div>

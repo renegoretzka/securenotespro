@@ -1,13 +1,18 @@
 import { withSSRContext } from 'aws-amplify'
 
+import EmptyNotes from '@/components/EmptyNotes'
 import Layout from '@/components/Layout'
 import NotesList from '@/components/NotesList'
 
+import { useGetNotesQuery } from '@/context/notes'
+
 function Home() {
+  const { data: notes } = useGetNotesQuery()
+
   return (
     <>
       <Layout title="Notes">
-        <NotesList />
+        {notes?.length < 1 ? <EmptyNotes /> : <NotesList notes={notes} />}
       </Layout>
     </>
   )

@@ -12,7 +12,7 @@ import { useSignInMutation } from '@/context/user'
 
 export default function Login() {
   const router = useRouter()
-  const [signIn, { isLoading, isSuccess, isError, error }] = useSignInMutation()
+  const [signIn, { isSuccess, isError, error }] = useSignInMutation()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -48,7 +48,7 @@ export default function Login() {
         setConfirmSignUpModal(true)
       }
     }
-  }, [isError])
+  }, [isError, error])
 
   return (
     <>

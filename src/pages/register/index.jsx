@@ -11,8 +11,6 @@ import { useSignUpMutation } from '@/context/user'
 
 export default function Register() {
   const [signUp, { isSuccess, isError, error }] = useSignUpMutation()
-  const [confirmSignUp, { isSuccess, isError, error }] =
-    useConfirmSignUpMutation()
 
   const [fullname, setFullname] = useState('')
   const [email, setEmail] = useState('')

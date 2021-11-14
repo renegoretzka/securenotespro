@@ -9,17 +9,6 @@ export const getUser = /* GraphQL */ `
       companyID
       createdAt
       updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       company {
         id
         name
@@ -48,9 +37,6 @@ export const listUsers = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name
@@ -77,9 +63,6 @@ export const getNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name
@@ -109,48 +92,6 @@ export const listNotes = /* GraphQL */ `
     $nextToken: String
   ) {
     listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        content
-        authorID
-        companyID
-        createdAt
-        updatedAt
-        author {
-          id
-          name
-          companyID
-          createdAt
-          updatedAt
-        }
-        company {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-    }
-  }
-`;
-export const getNotesByAuthor = /* GraphQL */ `
-  query GetNotesByAuthor(
-    $authorID: ID
-    $updatedAt: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelNoteFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    getNotesByAuthor(
-      authorID: $authorID
-      updatedAt: $updatedAt
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
       items {
         id
         content

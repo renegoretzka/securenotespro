@@ -1,111 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($id: String) {
-    onCreateUser(id: $id) {
-      id
-      name
-      companyID
-      createdAt
-      updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      company {
-        id
-        name
-        createdAt
-        updatedAt
-        members {
-          nextToken
-        }
-        notes {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($id: String) {
-    onUpdateUser(id: $id) {
-      id
-      name
-      companyID
-      createdAt
-      updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      company {
-        id
-        name
-        createdAt
-        updatedAt
-        members {
-          nextToken
-        }
-        notes {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($id: String) {
-    onDeleteUser(id: $id) {
-      id
-      name
-      companyID
-      createdAt
-      updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      company {
-        id
-        name
-        createdAt
-        updatedAt
-        members {
-          nextToken
-        }
-        notes {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const onCreateNote = /* GraphQL */ `
-  subscription OnCreateNote($authorID: String) {
-    onCreateNote(authorID: $authorID) {
+export const newNote = /* GraphQL */ `
+  subscription NewNote($companyID: ID!) {
+    newNote(companyID: $companyID) {
       id
       content
       authorID
@@ -118,9 +16,6 @@ export const onCreateNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name
@@ -143,9 +38,9 @@ export const onCreateNote = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateNote = /* GraphQL */ `
-  subscription OnUpdateNote($authorID: String) {
-    onUpdateNote(authorID: $authorID) {
+export const updatedNote = /* GraphQL */ `
+  subscription UpdatedNote($companyID: ID!) {
+    updatedNote(companyID: $companyID) {
       id
       content
       authorID
@@ -158,9 +53,6 @@ export const onUpdateNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name
@@ -183,9 +75,9 @@ export const onUpdateNote = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteNote = /* GraphQL */ `
-  subscription OnDeleteNote($authorID: String) {
-    onDeleteNote(authorID: $authorID) {
+export const deletedNote = /* GraphQL */ `
+  subscription DeletedNote($companyID: ID!) {
+    deletedNote(companyID: $companyID) {
       id
       content
       authorID
@@ -198,9 +90,6 @@ export const onDeleteNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name

@@ -1,5 +1,5 @@
 type User
-  @model
+  @model(subscriptions: null)
   @key(name: "usersByCompany", fields: ["companyID"])
   @auth(
     rules: [
@@ -12,11 +12,10 @@ type User
   name: String!
   companyID: ID
   company: Company @connection(fields: ["companyID"])
-  notes: [Note] @connection(keyName: "notesByAuthor", fields: ["id"])
 }
 
 type Note
-  @model
+  @model(subscriptions: null)
   @key(
     name: "notesByCompany"
     fields: ["companyID", "updatedAt"]
@@ -51,4 +50,10 @@ type Company
   name: String!
   notes: [Note] @connection(keyName: "notesByCompany", fields: ["id"])
   members: [User] @connection(keyName: "usersByCompany", fields: ["id"])
+}
+
+type Subscription {
+  newNote(companyID: ID!): Note @aws_subscribe(mutations: ["createNote"])
+  updatedNote(companyID: ID!): Note @aws_subscribe(mutations: ["updateNote"])
+  deletedNote(companyID: ID!): Note @aws_subscribe(mutations: ["deleteNote"])
 }

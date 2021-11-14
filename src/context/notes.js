@@ -3,6 +3,7 @@ import { api } from './api'
 
 import { getNote, getNotesByCompany } from '@/graphql/queries'
 import { createNote, deleteNote, updateNote } from '@/graphql/mutations'
+import { deletedNote, newNote, updatedNote } from '@/graphql/subscriptions'
 
 const notesApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -26,6 +27,68 @@ const notesApi = api.injectEndpoints({
         } catch (error) {
           return { error }
         }
+      },
+      async onCacheEntryAdded(
+        { companyID },
+        { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
+      ) {
+        let subscriptionNewNote
+        let subscriptionUpdatedNote
+        let subscriptionDeletedNote
+        try {
+          await cacheDataLoaded
+          subscriptionNewNote = API.graphql({
+            query: newNote,
+            variables: {
+              companyID
+            }
+          }).subscribe({
+            next: ({ value }) => {
+              updateCachedData((draft) => {
+                draft.unshift(value.data.newNote)
+              })
+            }
+          })
+          subscriptionUpdatedNote = API.graphql({
+            query: updatedNote,
+            variables: {
+              companyID
+            }
+          }).subscribe({
+            next: ({ value }) => {
+              updateCachedData((draft) => {
+                draft.splice(
+                  draft.findIndex(
+                    (note) => note.id === value.data.updatedNote.id
+                  ),
+                  1
+                )
+                draft.unshift(value.data.updatedNote)
+              })
+            }
+          })
+          subscriptionDeletedNote = API.graphql({
+            query: deletedNote,
+            variables: {
+              companyID
+            }
+          }).subscribe({
+            next: ({ value }) => {
+              updateCachedData((draft) => {
+                draft.splice(
+                  draft.findIndex(
+                    (note) => note.id === value.data.deletedNote.id
+                  ),
+                  1
+                )
+              })
+            }
+          })
+        } catch {}
+        await cacheEntryRemoved
+        subscriptionNewNote.unsubscribe()
+        subscriptionUpdatedNote.unsubscribe()
+        subscriptionDeletedNote.unsubscribe()
       },
       providesTags: (result) =>
         result

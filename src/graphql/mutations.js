@@ -12,17 +12,6 @@ export const createUser = /* GraphQL */ `
       companyID
       createdAt
       updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       company {
         id
         name
@@ -49,17 +38,6 @@ export const updateUser = /* GraphQL */ `
       companyID
       createdAt
       updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       company {
         id
         name
@@ -86,17 +64,6 @@ export const deleteUser = /* GraphQL */ `
       companyID
       createdAt
       updatedAt
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       company {
         id
         name
@@ -130,9 +97,6 @@ export const createNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name
@@ -173,9 +137,6 @@ export const updateNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name
@@ -216,9 +177,6 @@ export const deleteNote = /* GraphQL */ `
         companyID
         createdAt
         updatedAt
-        notes {
-          nextToken
-        }
         company {
           id
           name

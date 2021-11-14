@@ -56,7 +56,6 @@ const userApi = api.injectEndpoints({
               name: fullname
             }
           })
-          console.log(res)
           return {
             data: res
           }
@@ -68,9 +67,9 @@ const userApi = api.injectEndpoints({
     confirmSignUp: build.mutation({
       async queryFn({ email: username, code }) {
         try {
-          const res = await Auth.confirmSignUp(username, code)
+          await Auth.confirmSignUp(username, code)
           return {
-            data: res.attributes.sub
+            data: 'success'
           }
         } catch (error) {
           return { error }

@@ -1,23 +1,27 @@
 import { API } from 'aws-amplify'
 import { api } from './api'
 
-import { getNote, listNotes } from '@/graphql/queries'
+import { getNote, getNotesByCompany } from '@/graphql/queries'
 import { createNote, deleteNote, updateNote } from '@/graphql/mutations'
 
 const notesApi = api.injectEndpoints({
   endpoints: (build) => ({
     getNotes: build.query({
-      async queryFn(nextToken = undefined) {
+      async queryFn({ companyID, nextToken = undefined }) {
         try {
           const query = {
-            query: listNotes
+            query: getNotesByCompany,
+            variables: {
+              companyID,
+              sortDirection: 'DESC'
+            }
           }
           if (nextToken) {
             query.variables.nextToken = nextToken
           }
           const notes = await API.graphql(query)
           return {
-            data: notes.data.listNotes.items
+            data: notes.data.getNotesByCompany.items
           }
         } catch (error) {
           return { error }

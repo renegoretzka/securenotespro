@@ -5,9 +5,14 @@ import Layout from '@/components/Layout'
 import NotesList from '@/components/NotesList'
 
 import { useGetNotesQuery } from '@/context/notes'
+import { useGetAuthenticatedUserQuery } from '@/context/user'
 
 function Home() {
-  const { data: notes } = useGetNotesQuery()
+  const { data: user, isSuccess: userIsSucess } = useGetAuthenticatedUserQuery()
+  const { data: notes } = useGetNotesQuery(
+    { companyID: user?.companyID },
+    { skip: !userIsSucess }
+  )
 
   return (
     <>

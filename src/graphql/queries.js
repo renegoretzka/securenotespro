@@ -1,6 +1,67 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        notes {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        companyID
+        createdAt
+        updatedAt
+        notes {
+          nextToken
+        }
+        company {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getNote = /* GraphQL */ `
   query GetNote($id: ID!) {
     getNote(id: $id) {
@@ -14,11 +75,11 @@ export const getNote = /* GraphQL */ `
         id
         name
         companyID
+        createdAt
+        updatedAt
         notes {
           nextToken
         }
-        createdAt
-        updatedAt
         company {
           id
           name
@@ -29,12 +90,12 @@ export const getNote = /* GraphQL */ `
       company {
         id
         name
-        notes {
-          nextToken
-        }
         createdAt
         updatedAt
         members {
+          nextToken
+        }
+        notes {
           nextToken
         }
       }
@@ -157,89 +218,28 @@ export const getNotesByCompany = /* GraphQL */ `
     }
   }
 `;
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      name
-      companyID
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      company {
-        id
-        name
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        members {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        companyID
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-    }
-  }
-`;
 export const getCompany = /* GraphQL */ `
   query GetCompany($id: ID!) {
     getCompany(id: $id) {
       id
       name
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       members {
         items {
           id
           name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      notes {
+        items {
+          id
+          content
+          authorID
           companyID
           createdAt
           updatedAt
@@ -259,12 +259,12 @@ export const listCompanys = /* GraphQL */ `
       items {
         id
         name
-        notes {
-          nextToken
-        }
         createdAt
         updatedAt
         members {
+          nextToken
+        }
+        notes {
           nextToken
         }
       }

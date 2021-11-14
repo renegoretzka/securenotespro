@@ -1,6 +1,117 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        notes {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        notes {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      notes {
+        items {
+          id
+          content
+          authorID
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        notes {
+          nextToken
+        }
+      }
+    }
+  }
+`;
 export const createNote = /* GraphQL */ `
   mutation CreateNote(
     $input: CreateNoteInput!
@@ -17,11 +128,11 @@ export const createNote = /* GraphQL */ `
         id
         name
         companyID
+        createdAt
+        updatedAt
         notes {
           nextToken
         }
-        createdAt
-        updatedAt
         company {
           id
           name
@@ -32,12 +143,12 @@ export const createNote = /* GraphQL */ `
       company {
         id
         name
-        notes {
-          nextToken
-        }
         createdAt
         updatedAt
         members {
+          nextToken
+        }
+        notes {
           nextToken
         }
       }
@@ -60,11 +171,11 @@ export const updateNote = /* GraphQL */ `
         id
         name
         companyID
+        createdAt
+        updatedAt
         notes {
           nextToken
         }
-        createdAt
-        updatedAt
         company {
           id
           name
@@ -75,12 +186,12 @@ export const updateNote = /* GraphQL */ `
       company {
         id
         name
-        notes {
-          nextToken
-        }
         createdAt
         updatedAt
         members {
+          nextToken
+        }
+        notes {
           nextToken
         }
       }
@@ -103,11 +214,11 @@ export const deleteNote = /* GraphQL */ `
         id
         name
         companyID
+        createdAt
+        updatedAt
         notes {
           nextToken
         }
-        createdAt
-        updatedAt
         company {
           id
           name
@@ -118,123 +229,12 @@ export const deleteNote = /* GraphQL */ `
       company {
         id
         name
-        notes {
-          nextToken
-        }
         createdAt
         updatedAt
         members {
           nextToken
         }
-      }
-    }
-  }
-`;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
-      id
-      name
-      companyID
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      company {
-        id
-        name
         notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        members {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
-      id
-      name
-      companyID
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      company {
-        id
-        name
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        members {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    deleteUser(input: $input, condition: $condition) {
-      id
-      name
-      companyID
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      company {
-        id
-        name
-        notes {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        members {
           nextToken
         }
       }
@@ -249,23 +249,23 @@ export const createCompany = /* GraphQL */ `
     createCompany(input: $input, condition: $condition) {
       id
       name
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       members {
         items {
           id
           name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      notes {
+        items {
+          id
+          content
+          authorID
           companyID
           createdAt
           updatedAt
@@ -283,23 +283,23 @@ export const updateCompany = /* GraphQL */ `
     updateCompany(input: $input, condition: $condition) {
       id
       name
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       members {
         items {
           id
           name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      notes {
+        items {
+          id
+          content
+          authorID
           companyID
           createdAt
           updatedAt
@@ -317,23 +317,23 @@ export const deleteCompany = /* GraphQL */ `
     deleteCompany(input: $input, condition: $condition) {
       id
       name
-      notes {
-        items {
-          id
-          content
-          authorID
-          companyID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       createdAt
       updatedAt
       members {
         items {
           id
           name
+          companyID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      notes {
+        items {
+          id
+          content
+          authorID
           companyID
           createdAt
           updatedAt

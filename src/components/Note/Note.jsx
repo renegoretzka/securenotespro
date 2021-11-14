@@ -17,7 +17,7 @@ export default function Note({
   const [assigned, setAssigned] = useState(
     tempVisibility > -1 ? visibilities[tempVisibility] : visibilities[0]
   )
-  const [content, setContent] = useState(note.content ? note.content : '')
+  const [content, setContent] = useState(note?.content ? note?.content : '')
 
   function handleChangeContent(event) {
     setContent(event.target.value)

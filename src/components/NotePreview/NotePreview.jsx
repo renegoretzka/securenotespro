@@ -3,9 +3,8 @@ import { CalendarIcon } from '@heroicons/react/solid'
 import { UserGroupIcon } from '@heroicons/react/outline'
 
 export default function NotePreview({ note, teams }) {
-  if (teams.filter((team) => team.id === note.visibility).length === 0) {
-    return null
-  }
+  if (teams.filter((team) => team.id === note.visibility).length === 0) null
+
   return (
     <li>
       <Link href={`/note/${note.id}`}>

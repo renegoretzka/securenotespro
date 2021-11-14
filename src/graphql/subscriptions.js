@@ -9,7 +9,6 @@ export const newNote = /* GraphQL */ `
       authorID
       visibility
       companyID
-      teamID
       createdAt
       updatedAt
       author {
@@ -35,19 +34,6 @@ export const newNote = /* GraphQL */ `
         }
         teams {
           nextToken
-        }
-      }
-      team {
-        id
-        name
-        companyID
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          createdAt
-          updatedAt
         }
       }
     }
@@ -61,7 +47,6 @@ export const updatedNote = /* GraphQL */ `
       authorID
       visibility
       companyID
-      teamID
       createdAt
       updatedAt
       author {
@@ -87,19 +72,6 @@ export const updatedNote = /* GraphQL */ `
         }
         teams {
           nextToken
-        }
-      }
-      team {
-        id
-        name
-        companyID
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          createdAt
-          updatedAt
         }
       }
     }
@@ -113,7 +85,6 @@ export const deletedNote = /* GraphQL */ `
       authorID
       visibility
       companyID
-      teamID
       createdAt
       updatedAt
       author {
@@ -139,19 +110,6 @@ export const deletedNote = /* GraphQL */ `
         }
         teams {
           nextToken
-        }
-      }
-      team {
-        id
-        name
-        companyID
-        createdAt
-        updatedAt
-        company {
-          id
-          name
-          createdAt
-          updatedAt
         }
       }
     }

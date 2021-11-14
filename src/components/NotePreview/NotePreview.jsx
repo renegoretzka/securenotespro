@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import { CalendarIcon } from '@heroicons/react/solid'
+import { UserGroupIcon } from '@heroicons/react/outline'
 
-export default function NotePreview({ note }) {
+export default function NotePreview({ note, teams }) {
+  if (teams.filter((team) => team.id === note.visibility).length === 0) {
+    return null
+  }
   return (
     <li>
       <Link href={`/note/${note.id}`}>
@@ -19,7 +23,16 @@ export default function NotePreview({ note }) {
                 </p>
               </div>
             </div>
-            <div className="mt-2 sm:flex sm:justify-end">
+            <div className="mt-2 sm:flex sm:justify-between">
+              <div className="sm:flex">
+                <p className="flex items-center text-sm text-gray-500">
+                  <UserGroupIcon
+                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  {teams.filter((team) => team.id === note.visibility)[0].name}
+                </p>
+              </div>
               <div className="mt-2 flex items-center text-xs text-gray-500 sm:mt-0">
                 <CalendarIcon
                   className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"

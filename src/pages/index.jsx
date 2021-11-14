@@ -6,18 +6,28 @@ import NotesList from '@/components/NotesList'
 
 import { useGetNotesQuery } from '@/context/notes'
 import { useGetAuthenticatedUserQuery } from '@/context/user'
+import { useGetTeamsQuery } from '@/context/team'
 
 function Home() {
-  const { data: user, isSuccess: userIsSucess } = useGetAuthenticatedUserQuery()
+  const { data: user, isSuccess: isSuccessUser } =
+    useGetAuthenticatedUserQuery()
+  const { data: teams, isSuccess: isSuccessTeams } = useGetTeamsQuery()
   const { data: notes } = useGetNotesQuery(
     { companyID: user?.companyID },
-    { skip: !userIsSucess }
+    { skip: !isSuccessUser }
   )
 
   return (
     <>
       <Layout title="Notes">
-        {notes?.length < 1 ? <EmptyNotes /> : <NotesList notes={notes} />}
+        {notes?.length < 1 ? (
+          <EmptyNotes />
+        ) : (
+          <NotesList
+            notes={notes}
+            teams={teams ? [user?.company, ...teams] : [user?.company]}
+          />
+        )}
       </Layout>
     </>
   )

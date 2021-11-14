@@ -11,30 +11,38 @@ import {
   useUpdateNoteMutation
 } from '@/context/notes'
 import { useGetAuthenticatedUserQuery } from '@/context/user'
+import { useGetTeamsQuery } from '@/context/team'
 
 export default function EditNote() {
   const router = useRouter()
   const { id } = router.query
-  const { data: note } = useGetNoteQuery(id)
-  const { data: user } = useGetAuthenticatedUserQuery()
-  const [updateNote, { isSuccess }] = useUpdateNoteMutation()
-  const [deleteNote, { isSuccess: deleteIsSucess }] = useDeleteNoteMutation()
+
+  const { data: note, isSuccess: isSuccessNote } = useGetNoteQuery(id)
+  const { data: user, isSuccess: isSuccessUser } =
+    useGetAuthenticatedUserQuery()
+  const { data: teams, isSuccess: isSuccessTeams } = useGetTeamsQuery()
+
+  const [updateNote, { isSuccess: updateIsSuccess }] = useUpdateNoteMutation()
+  const [deleteNote, { isSuccess: deleteIsSuccess }] = useDeleteNoteMutation()
 
   useEffect(() => {
-    if (isSuccess || deleteIsSucess) {
+    if (updateIsSuccess || deleteIsSuccess) {
       router.push('/')
     }
-  }, [isSuccess, deleteIsSucess])
+  }, [updateIsSuccess, deleteIsSuccess])
 
   return (
     <Layout title="Edit Note">
-      <Note
-        note={note}
-        onSubmit={updateNote}
-        submitButtonText="Update Note"
-        onDelete={deleteNote}
-        editable={user?.id === note?.authorID}
-      />
+      {isSuccessNote && isSuccessUser && isSuccessTeams ? (
+        <Note
+          note={note}
+          visibilities={teams ? [user?.company, ...teams] : [user?.company]}
+          onSubmit={updateNote}
+          submitButtonText="Update Note"
+          onDelete={deleteNote}
+          editable={user?.id === note?.authorID}
+        />
+      ) : null}
     </Layout>
   )
 }

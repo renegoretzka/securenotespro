@@ -20,7 +20,7 @@ export const createUser = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
         }
       }
@@ -46,7 +46,7 @@ export const updateUser = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
         }
       }
@@ -72,7 +72,7 @@ export const deleteUser = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
         }
       }
@@ -88,7 +88,9 @@ export const createNote = /* GraphQL */ `
       id
       content
       authorID
+      visibility
       companyID
+      teamID
       createdAt
       updatedAt
       author {
@@ -112,8 +114,21 @@ export const createNote = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
+        }
+      }
+      team {
+        id
+        name
+        companyID
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
         }
       }
     }
@@ -128,7 +143,9 @@ export const updateNote = /* GraphQL */ `
       id
       content
       authorID
+      visibility
       companyID
+      teamID
       createdAt
       updatedAt
       author {
@@ -152,8 +169,21 @@ export const updateNote = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
+        }
+      }
+      team {
+        id
+        name
+        companyID
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
         }
       }
     }
@@ -168,7 +198,9 @@ export const deleteNote = /* GraphQL */ `
       id
       content
       authorID
+      visibility
       companyID
+      teamID
       createdAt
       updatedAt
       author {
@@ -192,8 +224,21 @@ export const deleteNote = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
+        }
+      }
+      team {
+        id
+        name
+        companyID
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
         }
       }
     }
@@ -219,11 +264,10 @@ export const createCompany = /* GraphQL */ `
         }
         nextToken
       }
-      notes {
+      teams {
         items {
           id
-          content
-          authorID
+          name
           companyID
           createdAt
           updatedAt
@@ -253,11 +297,10 @@ export const updateCompany = /* GraphQL */ `
         }
         nextToken
       }
-      notes {
+      teams {
         items {
           id
-          content
-          authorID
+          name
           companyID
           createdAt
           updatedAt
@@ -287,16 +330,93 @@ export const deleteCompany = /* GraphQL */ `
         }
         nextToken
       }
-      notes {
+      teams {
         items {
           id
-          content
-          authorID
+          name
           companyID
           createdAt
           updatedAt
         }
         nextToken
+      }
+    }
+  }
+`;
+export const createTeam = /* GraphQL */ `
+  mutation CreateTeam(
+    $input: CreateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    createTeam(input: $input, condition: $condition) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateTeam = /* GraphQL */ `
+  mutation UpdateTeam(
+    $input: UpdateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    updateTeam(input: $input, condition: $condition) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteTeam = /* GraphQL */ `
+  mutation DeleteTeam(
+    $input: DeleteTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    deleteTeam(input: $input, condition: $condition) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
       }
     }
   }

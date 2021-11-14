@@ -45,7 +45,9 @@ const notesApi = api.injectEndpoints({
           }).subscribe({
             next: ({ value }) => {
               updateCachedData((draft) => {
-                draft.unshift(value.data.newNote)
+                if (value.data.newNote) {
+                  draft.unshift(value.data.newNote)
+                }
               })
             }
           })
@@ -57,13 +59,13 @@ const notesApi = api.injectEndpoints({
           }).subscribe({
             next: ({ value }) => {
               updateCachedData((draft) => {
-                draft.splice(
-                  draft.findIndex(
-                    (note) => note.id === value.data.updatedNote.id
-                  ),
-                  1
+                const index = draft.findIndex(
+                  (note) => note.id === value.data.updatedNote.id
                 )
-                draft.unshift(value.data.updatedNote)
+                if (index >= 0) {
+                  draft.splice(index, 1)
+                  draft.unshift(value.data.updatedNote)
+                }
               })
             }
           })
@@ -75,12 +77,12 @@ const notesApi = api.injectEndpoints({
           }).subscribe({
             next: ({ value }) => {
               updateCachedData((draft) => {
-                draft.splice(
-                  draft.findIndex(
-                    (note) => note.id === value.data.deletedNote.id
-                  ),
-                  1
+                const index = draft.findIndex(
+                  (note) => note.id === value.data.deletedNote.id
                 )
+                if (index >= 0) {
+                  draft.splice(index, 1)
+                }
               })
             }
           })
@@ -118,7 +120,7 @@ const notesApi = api.injectEndpoints({
       providesTags: (result, error, id) => [{ type: 'Notes', id }]
     }),
     createNote: build.mutation({
-      async queryFn({ title, content, companyID }) {
+      async queryFn({ title, content, companyID, visibility }) {
         try {
           const mutation = {
             query: createNote,
@@ -126,7 +128,8 @@ const notesApi = api.injectEndpoints({
               input: {
                 title,
                 content,
-                companyID
+                companyID,
+                visibility
               }
             }
           }
@@ -141,7 +144,7 @@ const notesApi = api.injectEndpoints({
       invalidatesTags: [{ type: 'Notes', id: 'LIST' }]
     }),
     updateNote: build.mutation({
-      async queryFn({ id, title, content }) {
+      async queryFn({ id, title, content, visibility }) {
         try {
           const mutation = {
             query: updateNote,
@@ -149,7 +152,8 @@ const notesApi = api.injectEndpoints({
               input: {
                 id,
                 title,
-                content
+                content,
+                visibility
               }
             }
           }

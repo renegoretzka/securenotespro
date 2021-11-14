@@ -7,11 +7,14 @@ import Note from '@/components/Note'
 
 import { useCreateNoteMutation } from '@/context/notes'
 import { useGetAuthenticatedUserQuery } from '@/context/user'
+import { useGetTeamsQuery } from '@/context/team'
 
 export default function NewNote() {
   const router = useRouter()
   const [createNote, { isSuccess }] = useCreateNoteMutation()
-  const { data: user } = useGetAuthenticatedUserQuery()
+  const { data: user, isSuccess: isSuccessUser } =
+    useGetAuthenticatedUserQuery()
+  const { data: teams, isSuccess: isSuccessTeams } = useGetTeamsQuery()
 
   useEffect(() => {
     if (isSuccess) {
@@ -21,11 +24,14 @@ export default function NewNote() {
 
   return (
     <Layout title="New Note">
-      <Note
-        note={{ companyID: user?.companyID }}
-        onSubmit={createNote}
-        submitButtonText="Create Note"
-      />
+      {isSuccessUser && isSuccessTeams ? (
+        <Note
+          note={{ companyID: user?.companyID }}
+          visibilities={teams ? [user?.company, ...teams] : [user?.company]}
+          onSubmit={createNote}
+          submitButtonText="Create Note"
+        />
+      ) : null}
     </Layout>
   )
 }

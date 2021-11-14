@@ -24,7 +24,7 @@ type Note
   @auth(
     rules: [
       { allow: owner, ownerField: "authorID" }
-      { allow: groups, groupsField: "companyID", operations: [read] }
+      { allow: groups, groupsField: "visibility", operations: [read] }
       { allow: private, provider: iam }
     ]
   ) {
@@ -32,6 +32,7 @@ type Note
   content: String
   authorID: ID
   author: User @connection(fields: ["authorID"])
+  visibility: ID! # Either companyID or teamID
   companyID: ID!
   company: Company @connection(fields: ["companyID"])
   createdAt: AWSDateTime
@@ -48,8 +49,23 @@ type Company
   ) {
   id: ID!
   name: String!
-  notes: [Note] @connection(keyName: "notesByCompany", fields: ["id"])
   members: [User] @connection(keyName: "usersByCompany", fields: ["id"])
+  teams: [Team] @connection(keyName: "teamsByCompany", fields: ["id"])
+}
+
+type Team
+  @model
+  @key(name: "teamsByCompany", fields: ["companyID"])
+  @auth(
+    rules: [
+      { allow: groups, groupsField: "id" }
+      { allow: private, provider: iam }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  companyID: ID!
+  company: Company @connection(fields: ["companyID"])
 }
 
 type Subscription {

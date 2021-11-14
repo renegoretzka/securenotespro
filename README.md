@@ -46,3 +46,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Create a AWS Cognito Group which has the name of the id from the created company.
 - Add the user to the newly created Cognito Group
 - (User needs to signout and sign in again, if he is already signed in or wait until the token expires to apply changes [Cognito Group saved into token])
+
+## Creating a team and linking a user to it
+
+- Go to AppSync console and run the GraphQL mutation `createTeam`.
+- Copy the id of the created team from the response
+- Create a AWS Cognito Group which has the name of the id from the created team.
+- Add the user to the newly created Cognito Group
+- (User needs to signout and sign in again, if he is already signed in or wait until the token expires to apply changes [Cognito Group saved into token])

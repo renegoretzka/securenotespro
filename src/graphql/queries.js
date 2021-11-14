@@ -17,7 +17,7 @@ export const getUser = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
         }
       }
@@ -54,7 +54,9 @@ export const getNote = /* GraphQL */ `
       id
       content
       authorID
+      visibility
       companyID
+      teamID
       createdAt
       updatedAt
       author {
@@ -78,8 +80,21 @@ export const getNote = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
+        }
+      }
+      team {
+        id
+        name
+        companyID
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
         }
       }
     }
@@ -96,7 +111,9 @@ export const listNotes = /* GraphQL */ `
         id
         content
         authorID
+        visibility
         companyID
+        teamID
         createdAt
         updatedAt
         author {
@@ -109,6 +126,13 @@ export const listNotes = /* GraphQL */ `
         company {
           id
           name
+          createdAt
+          updatedAt
+        }
+        team {
+          id
+          name
+          companyID
           createdAt
           updatedAt
         }
@@ -138,7 +162,9 @@ export const getNotesByCompany = /* GraphQL */ `
         id
         content
         authorID
+        visibility
         companyID
+        teamID
         createdAt
         updatedAt
         author {
@@ -151,6 +177,13 @@ export const getNotesByCompany = /* GraphQL */ `
         company {
           id
           name
+          createdAt
+          updatedAt
+        }
+        team {
+          id
+          name
+          companyID
           createdAt
           updatedAt
         }
@@ -176,11 +209,10 @@ export const getCompany = /* GraphQL */ `
         }
         nextToken
       }
-      notes {
+      teams {
         items {
           id
-          content
-          authorID
+          name
           companyID
           createdAt
           updatedAt
@@ -205,8 +237,55 @@ export const listCompanys = /* GraphQL */ `
         members {
           nextToken
         }
-        notes {
+        teams {
           nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getTeam = /* GraphQL */ `
+  query GetTeam($id: ID!) {
+    getTeam(id: $id) {
+      id
+      name
+      companyID
+      createdAt
+      updatedAt
+      company {
+        id
+        name
+        createdAt
+        updatedAt
+        members {
+          nextToken
+        }
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listTeams = /* GraphQL */ `
+  query ListTeams(
+    $filter: ModelTeamFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        companyID
+        createdAt
+        updatedAt
+        company {
+          id
+          name
+          createdAt
+          updatedAt
         }
       }
       nextToken

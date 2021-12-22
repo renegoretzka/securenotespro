@@ -25,7 +25,7 @@ const initializeUser = async ({ id, name }) => {
     })
     return data.createUser
   } catch (error) {
-    console.log('Something went wrong in the initializeUser function:', error)
+    console.log('Something went wrong in the initializeUser function: ', error)
   }
 }
 

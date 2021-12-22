@@ -33,13 +33,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+amplify/team-provider-info.json
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/logs
 amplify/mock-data
 amplify/backend/amplify-meta.json
-amplify/backend/awscloudformation
 amplify/backend/.temp
 build/
 dist/
@@ -54,4 +55,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-amplify/team-provider-info.json
